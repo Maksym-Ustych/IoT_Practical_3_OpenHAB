@@ -1,0 +1,9 @@
+// Practical 3.1 — Multi-protocol Weather Station
+// BLE Items used by the OpenHAB emulation rule
+
+Number Weather_BLE_Temperature "BLE Температура [%.1f]" <temperature>
+Number Weather_BLE_Humidity "BLE Вологість [%.0f]" <humidity>
+Number Weather_BLE_Battery "BLE Battery [%.0f %%]" <battery>
+Number Weather_BLE_RSSI "BLE RSSI [%.0f dBm]"
+Number Weather_BLE_Beacon_RSSI "BLE Beacon RSSI [%.0f dBm]"
+String Weather_BLE_Status "BLE Статус [%s]"
