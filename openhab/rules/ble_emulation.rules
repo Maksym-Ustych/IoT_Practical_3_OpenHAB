@@ -20,10 +20,13 @@ then
     if (Weather_BLE_Battery.state == NULL || Weather_BLE_Battery.state == UNDEF) {
         Weather_BLE_Battery.postUpdate("100")
     } else {
-        val battery = (Weather_BLE_Battery.state as Number).intValue
+        val battery = (Weather_BLE_Battery.state as Number).doubleValue
 
-        if (battery > 0) {
-            Weather_BLE_Battery.postUpdate((battery - 1).toString)
+        if (battery <= 0) {
+            Weather_BLE_Battery.postUpdate("100")
+        } else {
+            val newBattery = Math::round((battery - 0.1) * 10.0) / 10.0
+            Weather_BLE_Battery.postUpdate(newBattery.toString)
         }
     }
 
