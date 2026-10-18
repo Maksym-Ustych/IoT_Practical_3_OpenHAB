@@ -1,0 +1,35 @@
+rule "BLE Emulation"
+when
+    Time cron "0/25 * * * * ? *"
+then
+    val temperature = 20.0 + (Math::random * 5.0)
+    val humidity = 45.0 + (Math::random * 15.0)
+
+    val tempRounded = Math::round(temperature * 10.0) / 10.0
+    val humidityRounded = Math::round(humidity)
+
+    val rssi = -30 - Math::round(Math::random * 40.0)
+    val beaconRssi = -40 - Math::round(Math::random * 25.0)
+
+    Weather_BLE_Temperature.postUpdate(tempRounded.toString)
+    Weather_BLE_Humidity.postUpdate(humidityRounded.toString)
+
+    Weather_BLE_RSSI.postUpdate(rssi.toString)
+    Weather_BLE_Beacon_RSSI.postUpdate(beaconRssi.toString)
+
+    if (Weather_BLE_Battery.state == NULL || Weather_BLE_Battery.state == UNDEF) {
+        Weather_BLE_Battery.postUpdate("100")
+    } else {
+        val battery = (Weather_BLE_Battery.state as Number).intValue
+
+        if (battery > 0) {
+            Weather_BLE_Battery.postUpdate((battery - 1).toString)
+        }
+    }
+
+    if (rssi < -60) {
+        Weather_BLE_Status.postUpdate("WEAK_SIGNAL")
+    } else {
+        Weather_BLE_Status.postUpdate("CONNECTED")
+    }
+end
