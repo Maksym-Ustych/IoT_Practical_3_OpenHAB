@@ -139,3 +139,24 @@ BLE-дані автоматично оновлюються кожні 25 сек�
 - активні протоколи MQTT, HTTP і BLE.
 
 ![BLE and Analytics dashboard](docs/dashboard_ble_analytics.jpg)
+
+## Тестування MQTT-керування
+
+Для перевірки керування пристроями було запущено підписку на всі MQTT-топіки пристроїв:
+
+`weather_station/devices/#`
+
+Під час тестування з Dashboard було перевірено:
+- увімкнення та вимкнення лампи;
+- увімкнення та вимкнення вентилятора;
+- зміну яскравості лампи.
+
+У терміналі Mosquitto були отримані відповідні команди:
+- `lamp/command OFF`
+- `lamp/command ON`
+- `fan/command OFF`
+- `lamp/brightness/command 44`
+
+Це підтверджує передачу команд від OpenHAB через MQTT Broker.
+
+![MQTT control test](docs/mqtt_control_test.jpg)
