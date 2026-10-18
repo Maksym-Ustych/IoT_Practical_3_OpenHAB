@@ -1,0 +1,25 @@
+rule "Protocol Analytics"
+when
+    Time cron "0 * * * * ? *"
+then
+    val mqttTemp = (Weather_MQTT_Temperature.state as Number).doubleValue
+    val httpTemp = (Weather_HTTP_Temperature.state as Number).doubleValue
+    val bleTemp = (Weather_BLE_Temperature.state as Number).doubleValue
+
+    val average = (mqttTemp + httpTemp + bleTemp) / 3.0
+    val avgRounded = Math::round(average * 10.0) / 10.0
+
+    var maxTemp = mqttTemp
+    if (httpTemp > maxTemp) maxTemp = httpTemp
+    if (bleTemp > maxTemp) maxTemp = bleTemp
+
+    var minTemp = mqttTemp
+    if (httpTemp < minTemp) minTemp = httpTemp
+    if (bleTemp < minTemp) minTemp = bleTemp
+
+    val deviation = Math::round((maxTemp - minTemp) * 10.0) / 10.0
+
+    Weather_Avg_Temperature.postUpdate(avgRounded.toString)
+    Weather_Temp_Deviation.postUpdate(deviation.toString)
+    Weather_Active_Protocols.postUpdate("MQTT, HTTP, BLE")
+end
