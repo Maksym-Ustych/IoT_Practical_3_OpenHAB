@@ -160,3 +160,27 @@ BLE-дані автоматично оновлюються кожні 25 сек�
 Це підтверджує передачу команд від OpenHAB через MQTT Broker.
 
 ![MQTT control test](docs/mqtt_control_test.jpg)
+
+## Тестування HTTP REST API
+
+Для перевірки HTTP API виконано запит до endpoint:
+
+`http://localhost:8090/current`
+
+Сервер повернув:
+- статус `200 OK`;
+- тип вмісту `application/json`;
+- заголовок `X-IoT-Protocol: HTTP-REST`;
+- JSON з температурою, вологістю та тиском.
+
+![HTTP headers test](docs/http_headers_test.jpg)
+
+Також перевірено обробку помилкового endpoint:
+
+`http://localhost:8090/unknown`
+
+Сервер коректно повернув:
+- статус `404 Not Found`;
+- JSON-відповідь `{"error": "Endpoint not found"}`.
+
+![HTTP error test](docs/http_error_test.jpg)
