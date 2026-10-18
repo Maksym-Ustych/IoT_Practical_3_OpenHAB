@@ -38,3 +38,31 @@
 ### Тестування MQTT
 
 ![MQTT testing](docs/mqtt_testing.jpg)
+
+## HTTP REST API
+
+Для емуляції HTTP REST API створено локальний Python-сервер на порту `8090`.
+
+Використані endpoints:
+- `/current` — температура, вологість і атмосферний тиск;
+- `/status` — стан системи;
+- `/devices` — стан лампи, яскравість і вентилятор.
+
+У OpenHAB створено HTTP URL Thing з базовою адресою:
+
+`http://localhost:8090`
+
+Для обробки JSON-відповідей використано JSONPath Transformation.
+
+Створені HTTP-канали:
+- HTTP Температура;
+- HTTP Вологість;
+- HTTP Тиск;
+- HTTP Статус;
+- HTTP Лампа;
+- HTTP Яскравість;
+- HTTP Вентилятор.
+
+### HTTP Channels
+
+![HTTP channels](docs/http_channels.jpg)
