@@ -95,3 +95,15 @@
 ### BLE Emulation
 
 ![BLE emulation](docs/ble_emulation.jpg)
+
+## Мультипротокольний Dashboard
+
+Для спільного моніторингу створено сторінку OpenHAB `Мультипротокольна метеостанція`.
+
+На одній сторінці відображаються дані трьох протоколів:
+
+- MQTT — температура, вологість, тиск, RSSI та керування пристроями;
+- HTTP — дані REST API `/current`, `/status` і `/devices`;
+- BLE — температура, вологість, Battery, RSSI, Beacon RSSI та стан з'єднання.
+
+![Multi-protocol dashboard](docs/mult_protocol_dashboard.jpg)
