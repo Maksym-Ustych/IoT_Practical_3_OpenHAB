@@ -10,3 +10,31 @@
 - BLE емуляцію датчиків і beacon;
 - інтеграцію даних у OpenHAB;
 - тестування та аналіз роботи протоколів.
+
+## MQTT
+
+Для обміну даними використовується локальний MQTT-брокер Mosquitto та MQTT Binding в OpenHAB.
+
+Створені MQTT-канали:
+- температура — `weather_station/sensors/temperature`;
+- вологість — `weather_station/sensors/humidity`;
+- атмосферний тиск — `weather_station/sensors/pressure`;
+- RSSI — `weather_station/status/rssi`;
+- стан лампи — `weather_station/devices/lamp/state`;
+- яскравість лампи — `weather_station/devices/lamp/brightness/state`;
+- стан вентилятора — `weather_station/devices/fan/state`.
+
+Для перевірки передавання повідомлень використано QoS 1 та параметр retain.
+
+Тестові значення:
+- температура — 23.7;
+- вологість — 56;
+- тиск — 1013.2;
+- RSSI — -48 dBm;
+- лампа — ON;
+- яскравість — 75%;
+- вентилятор — ON.
+
+### Тестування MQTT
+
+![MQTT testing](docs/mqtt_testing.jpg)
