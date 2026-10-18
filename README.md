@@ -66,3 +66,32 @@
 ### HTTP Channels
 
 ![HTTP channels](docs/http_channels.jpg)
+
+## BLE
+
+Для BLE-частини в OpenHAB було створено віртуальний контролер `BLE Virtual Adapter`.
+
+На Windows контролер відобразив помилку:
+
+`COMMUNICATION_ERROR — No Physical Bluetooth adapters found`
+
+Тому BLE-пристрої реалізовано програмною емуляцією через Items і Rule DSL.
+
+Створені BLE Items:
+- `Weather_BLE_Temperature` — температура;
+- `Weather_BLE_Humidity` — вологість;
+- `Weather_BLE_Battery` — рівень батареї;
+- `Weather_BLE_RSSI` — рівень сигналу;
+- `Weather_BLE_Beacon_RSSI` — RSSI BLE-маяка;
+- `Weather_BLE_Status` — стан з'єднання.
+
+Правило `BLE Емуляція` виконується кожні 25 секунд та:
+- змінює температуру і вологість;
+- генерує RSSI;
+- моделює поступовий розряд батареї;
+- оновлює RSSI BLE-маяка;
+- визначає стан `CONNECTED` або `WEAK_SIGNAL`.
+
+### BLE Emulation
+
+![BLE emulation](docs/ble_emulation.jpg)
